@@ -1,3 +1,2 @@
 # Qr_Aplicacion
 
-# Titulo
