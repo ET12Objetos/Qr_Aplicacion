@@ -3,8 +3,6 @@ DROP USER IF EXISTS 'organizador'@'localhost';
 DROP USER IF EXISTS 'administrador'@'localhost';
 DROP USER IF EXISTS 'controlacceso'@'localhost';
 
--- 1️⃣ USUARIO: se registra, compra, consulta eventos
-
 CREATE USER 'usuario'@'localhost' IDENTIFIED BY 'User123!';
 
 GRANT INSERT ON AuthTokens TO 'usuario'@'localhost';
@@ -18,8 +16,6 @@ GRANT INSERT, UPDATE ON 5to_SistemaDeBoleteria.Entrada TO 'usuario'@'localhost';
 GRANT INSERT, SELECT ON 5to_SistemaDeBoleteria.QR TO 'usuario'@'localhost';
 
 
--- 2️⃣ ORGANIZADOR: administra eventos, funciones y tarifas
-
 GRANT INSERT ON AuthTokens TO 'organizador'@'localhost';
 CREATE USER 'organizador'@'localhost' IDENTIFIED BY 'Org123!';
 
@@ -30,9 +26,6 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON 5to_SistemaDeBoleteria.Tarifa TO 'organi
 GRANT SELECT ON 5to_SistemaDeBoleteria.Orden TO 'organizador'@'localhost';
 GRANT SELECT ON 5to_SistemaDeBoleteria.Entrada TO 'organizador'@'localhost';
 GRANT SELECT ON 5to_SistemaDeBoleteria.QR TO 'organizador'@'localhost';
-
-
--- 3️⃣ ADMINISTRADOR: acceso completo a toda la DB
 
 CREATE USER 'administrador'@'localhost' IDENTIFIED BY 'Admin123!';
 
@@ -48,7 +41,6 @@ GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.sector TO 'admin
 GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.tarifa TO 'administrador'@'localhost';
 GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.usuario TO 'administrador'@'localhost';
 
--- 4️⃣ CONTROL DE ACCESO: valida entradas y QR
 
 GRANT INSERT ON AuthTokens TO 'controlacceso'@'localhost';
 CREATE USER 'controlacceso'@'localhost' IDENTIFIED BY 'Acceso123!';
