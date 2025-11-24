@@ -36,8 +36,17 @@ GRANT SELECT ON 5to_SistemaDeBoleteria.QR TO 'organizador'@'localhost';
 
 CREATE USER 'administrador'@'localhost' IDENTIFIED BY 'Admin123!';
 
-GRANT ALL ON 5to_SistemaDeBoleteria.* TO 'administrador'@'localhost';
-
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.authtokens TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.cliente TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.entrada TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.funcion TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.evento TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.local TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.orden TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.qr TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.sector TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.tarifa TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.usuario TO 'administrador'@'localhost';
 
 -- 4️⃣ CONTROL DE ACCESO: valida entradas y QR
 
