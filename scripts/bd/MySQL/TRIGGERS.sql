@@ -3,17 +3,12 @@
 
 -- DELIMITER $$
 
--- -- ========================= USUARIO =====================================
-
 -- DROP TRIGGER IF EXISTS BefInsUsuario $$
 -- CREATE TRIGGER BefInsUsuario BEFORE INSERT ON Usuario FOR EACH ROW
 -- BEGIN
 --     SET NEW.Contraseña = SHA2(NEW.Contraseña, 256);
 -- END $$
 
--- -- =======================================================================
-
--- -- ========================= ENTRADA =====================================
 -- DROP TRIGGER IF EXISTS VerificarCompraEntrada $$
 -- CREATE TRIGGER VerificarCompraEntrada
 -- BEFORE INSERT ON Entrada
@@ -64,11 +59,6 @@
 --         END IF;
 -- END $$
 
--- -- ================================== TARIFA =====================================
--- -- ========================= EVENTO =====================================
--- -- =======================================================================
-
--- -- ======================= FUNCION ==================================
 
 -- DROP TRIGGER IF EXISTS BefInsFuncion $$
 -- CREATE TRIGGER BefInsFuncion BEFORE INSERT ON Funcion FOR EACH ROW
@@ -78,5 +68,3 @@
 --         SET new.Cancelado = TRUE;
 --     END IF;
 -- END$$
-
--- -- ==================================================================
