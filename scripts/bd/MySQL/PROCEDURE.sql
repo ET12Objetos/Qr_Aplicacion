@@ -20,10 +20,6 @@ USE 5to_SistemaDeBoleteria;
 --     COMMIT;
 
 -- END$$
---========================== FUNCION ================================================
---===================================================================================
-
---========================== EVENTO =================================================
 
 -- DROP PROCEDURE IF EXISTS PublicarEvento $$
 -- CREATE PROCEDURE PublicarEvento(IN unIdEvento INT)
@@ -70,15 +66,16 @@ USE 5to_SistemaDeBoleteria;
 --         SET Cancelado = TRUE
 --         WHERE IdEvento = unIdEvento;
 
---         UPDATE Evento
+--         UPDATE Evento--========================== FUNCION ================================================
+--===================================================================================
+
+--========================== EVENTO =================================================
+
+-- DROP PROCEDURE IF EXISTS PublicarEvento $$
 --         SET Estado = 'Cancelado'
 --         WHERE IdEvento = unIdEvento;
 --     COMMIT;
 -- END$$
-
---===================================================================================
-
--- ====================================== ORDEN ===========================================================
 
 -- DROP PROCEDURE IF EXISTS `AltaOrden`;
 
@@ -162,13 +159,6 @@ USE 5to_SistemaDeBoleteria;
 --     COMMIT;
 -- END$$
 
-
---=========================================================================================================
-
-
---====================================== ENTRADA ==========================================================
-
-
 -- DROP PROCEDURE IF EXISTS CancelarEntrada $$
 -- CREATE PROCEDURE CancelarEntrada(IN unIdEntrada INT)
 -- BEGIN
@@ -200,5 +190,3 @@ USE 5to_SistemaDeBoleteria;
 --     END IF;
 --     COMMIT;
 -- END$$
-
---========================================================================================================
