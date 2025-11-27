@@ -96,7 +96,7 @@ Scripts incluidos:
 ```bash
 
 
-git clone https://github.com/Darkops56/Qr_Aplicacion
+git clone https://github.com/star-lightt/Qr_Aplicacion
 
 ```
 #  Configurar la base de datos MySQL
