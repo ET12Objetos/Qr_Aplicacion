@@ -5,6 +5,7 @@ using Dapper;
 using System.Data;
 using SistemaDeBoleteria.Core.DTOs;
 using SistemaDeBoleteria.Core.Inheritance;
+using System.Globalization;
 
 namespace SistemaDeBoleteria.Repositories;
 
@@ -40,24 +41,30 @@ public class EventoRepository :  DbRepositoryBase, IEventoRepository
     #region Validación de negocio
     
     const string strExists = @"SELECT EXISTS  (SELECT 1 
-                                                FROM Evento WHERE IdEvento = @ID)";
+                                                FROM Evento 
+                                                WHERE IdEvento = @ID)";
     const string strHasFunciones = @"SELECT EXISTS(SELECT 1 
-                                                   FROM Funcion 
-                                                   WHERE IdEvento = @ID)";
+                                                    FROM Funcion 
+                                                    WHERE IdEvento = @ID)";
+    const string strHasTarifas = @"SELECT EXISTS(SELECT 1 
+                                                    FROM Tarifa T 
+                                                    JOIN Funcion F ON F.IdFuncion = T.IdFuncion 
+                                                    WHERE F.IdEvento = @ID)";
     const string strHasTarifasActivas = @"SELECT EXISTS(SELECT 1 
                                                         FROM Tarifa T 
                                                         JOIN Funcion F ON F.IdFuncion = T.IdFuncion 
                                                         WHERE F.IdEvento = @ID 
                                                         AND T.Estado = 'Activa')";
     const string srtUpdPublicado = @"UPDATE Evento
-                                     SET Estado = 'Publicado'
-                                     WHERE IdEvento = @ID;";
+                                    SET Estado = 'Publicado'
+                                    WHERE IdEvento = @ID;";
     
     const string strUpdCancelado = @"UPDATE Evento
-                                     SET Estado = 'Cancelado'
-                                     WHERE IdEvento = @ID;";
+                                    SET Estado = 'Cancelado'
+                                    WHERE IdEvento = @ID;";
     public bool Exists(int IdEvento) => UseNewConnection(db => db.ExecuteScalar<bool>(strExists, new{ ID = IdEvento }));
-    public bool HasFunciones(int idEvento) => UseNewConnection(db => db.ExecuteScalar<bool>(strHasFunciones, new { ID = idEvento}));
+    public bool HasFunciones(int idEvento) => UseNewConnection(db => db.ExecuteScalar<bool>(strHasFunciones, new { ID = idEvento }));
+    public bool HasTarifas(int idEvento) => UseNewConnection(db => db.ExecuteScalar<bool>(strHasTarifas, new { ID = idEvento}));
     public bool HasTarifasActivas(int idEvento) => UseNewConnection(db => db.ExecuteScalar<bool>(strHasTarifasActivas, new {ID = idEvento}));
     public bool UpdPublicado(int idEvento) => UseNewConnection( db => db.Execute(srtUpdPublicado, new { ID = idEvento}) > 0);
     public bool UpdCancelar(int idEvento) => UseNewConnection(db => db.Execute(strUpdCancelado, new { ID = idEvento }) > 0 );

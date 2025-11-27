@@ -50,8 +50,7 @@ namespace SistemaDeBoleteria.Services
                 throw new NotFoundException("No se encontró el evento especificado para actualizar.");
     
             if(!eventoRepository.Update(evento.Adapt<Evento>(), IdEvento))
-                throw new BusinessException("No se pudo actualizar el evento");
-
+            throw new BusinessException("No se pudo actualizar el evento");
             return eventoRepository.Select(IdEvento).Adapt<MostrarEventoDTO>();
         }
         
@@ -61,6 +60,8 @@ namespace SistemaDeBoleteria.Services
                 throw new NotFoundException("No se encontró el evento especificado.");
             if(!eventoRepository.HasFunciones(IdEvento))
                 throw new BusinessException("El evento no puede publicarse: no tiene funciones");
+            if (!eventoRepository.HasTarifas(IdEvento))
+                throw new BusinessException(" El evento no puede publicarse: no tiene tarifas");
             if(!eventoRepository.HasTarifasActivas(IdEvento))
                 throw new BusinessException("El evento no puede publicarse: no tiene tarifas activas.");
 
@@ -82,6 +83,7 @@ namespace SistemaDeBoleteria.Services
         
         public void CancelarEvento(int IdEvento)
         { 
+
             if(!eventoRepository.Exists(IdEvento))
                 throw new NotFoundException("No se encontró el evento especificado");
 

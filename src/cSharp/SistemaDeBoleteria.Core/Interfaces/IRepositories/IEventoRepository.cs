@@ -16,5 +16,6 @@ namespace SistemaDeBoleteria.Core.Interfaces.IRepositories
         bool HasTarifasActivas(int idEvento);
         bool UpdPublicado(int idEvento);
         bool UpdCancelar(int idEvento);
+        bool HasTarifas(int idEvento);
     }
 }

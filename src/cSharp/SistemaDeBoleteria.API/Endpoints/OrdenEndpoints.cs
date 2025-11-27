@@ -67,8 +67,8 @@ namespace SistemaDeBoleteria.API.Endpoints
                 ([FromRoute] int ordenID,
                  [FromServices] IOrdenService ordenService) =>
                 {
-                    ordenService.PagarOrden(ordenID);
-                    return Results.Ok(new { message = "Pagado Exitosamente." });
+                    var idEntrada = ordenService.PagarOrden(ordenID);
+                    return Results.Ok(new { message = "Pagado Exitosamente.", IdEntrada = idEntrada });
                 })
                 .WithTags("G - Orden")
                 .RequireAuthorization("Cliente");

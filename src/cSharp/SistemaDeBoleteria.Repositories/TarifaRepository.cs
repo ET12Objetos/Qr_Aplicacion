@@ -20,9 +20,11 @@ public class TarifaRepository :  DbRepositoryBase, ITarifaRepository
                                 Stock = @Stock, 
                                 Estado = @Estado 
                             WHERE IdTarifa = @ID";
-    public IEnumerable<Tarifa> SelectAllByFuncionId(int idFuncion) => UseNewConnection(db => db.Query<Tarifa>("SELECT * FROM Tarifa WHERE IdFuncion = @ID", new { ID = idFuncion }));
+    public IEnumerable<Tarifa> SelectAllByFuncionId(int idFuncion) 
+    => UseNewConnection(db => db.Query<Tarifa>("SELECT * FROM Tarifa WHERE IdFuncion = @ID", new { ID = idFuncion }));
 
-    public Tarifa? Select(int IdTarifa) => UseNewConnection(db => db.QueryFirstOrDefault<Tarifa>("SELECT * FROM Tarifa WHERE IdTarifa = @ID", new { ID = IdTarifa }));
+    public Tarifa? Select(int IdTarifa) 
+    => UseNewConnection(db => db.QueryFirstOrDefault<Tarifa>("SELECT * FROM Tarifa WHERE IdTarifa = @ID", new { ID = IdTarifa }));
     
     public Tarifa Insert(Tarifa tarifa) => UseNewConnection(db =>
     {
@@ -77,16 +79,24 @@ public class TarifaRepository :  DbRepositoryBase, ITarifaRepository
                                                                      WHERE E.Anulado = TRUE
                                                                      AND O.IdTarifa = Tarifa.IdTarifa)
                                                 WHERE IdFuncion = @ID";
+    const string strActivarTarifasIdEvento  =  @"UPDATE Tarifa
+                                                SET Estado = 'Activa'
+                                                WHERE IdFuncion IN (SELECT IdFuncion 
+                                                                    FROM Funcion 
+                                                                    WHERE IdEvento = @ID)";
     public bool Exists(int idTarifa) => UseNewConnection(db => db.ExecuteScalar<bool>(strExists, new{ ID = idTarifa }));
     public bool DevolverStock(int idOrden) 
     => UseNewConnection(db =>
                 db.Execute(strDevolverReservaStock, new { ID = idOrden}) > 0
         );
     public bool ReducirStock(int idTarifa) 
-    => UseNewConnection(db =>
-                db.Execute(strUpdReducirStock, new { unIdTarifa = idTarifa}) > 0
-        );                                                        
-    public bool SuspenderTarifasPorIdEvento(int idEvento) => UseNewConnection(db => db.Execute(strSuspenderTarifasEvento, new { ID = idEvento})> 0);
-    public bool SuspenderTarifasPorIdFuncion(int idFuncion) => UseNewConnection(db => db.Execute(strSuspenderTarifasFuncion, new { ID = idFuncion})> 0);
+    => UseNewConnection(db => db.Execute(strUpdReducirStock, new { unIdTarifa = idTarifa}) > 0);                                                        
+    public bool SuspenderTarifasPorIdEvento(int idEvento) 
+    => UseNewConnection(db => db.Execute(strSuspenderTarifasEvento, new { ID = idEvento})> 0);
+    public bool SuspenderTarifasPorIdFuncion(int idFuncion)
+    => UseNewConnection(db => db.Execute(strSuspenderTarifasFuncion, new { ID = idFuncion }) > 0);
+    public bool ActivarTarifasByIdEvento(int idEvento)
+    => UseNewConnection(db => db.Execute(strActivarTarifasIdEvento, new { ID = idEvento }) > 0);
+    
     #endregion
 }

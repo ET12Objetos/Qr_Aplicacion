@@ -8,4 +8,5 @@ public interface ITarifaService
     IEnumerable<MostrarTarifaDTO> GetAllByFuncionId(int IdFuncion);
     MostrarTarifaDTO? Get(int id);
     MostrarTarifaDTO Put(ActualizarTarifaDTO tarifa, int IdTarifa);
+    void ActivarTarifas(int idEvento);
 }

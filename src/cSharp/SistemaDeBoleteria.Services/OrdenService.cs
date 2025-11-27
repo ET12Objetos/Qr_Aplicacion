@@ -49,7 +49,7 @@ namespace SistemaDeBoleteria.Services
 
             return newOrden.Adapt<MostrarOrdenDTO>();
         }
-        public bool PagarOrden(int idOrden)
+        public int PagarOrden(int idOrden)
         {
             if(!ordenRepository.Exists(idOrden))
                 throw new NotFoundException("No se encontró la orden especificada.");
@@ -84,7 +84,7 @@ namespace SistemaDeBoleteria.Services
 
             if(!codigoQRRepository.Insert(idEntrada))
                 throw new DataBaseException("No se pudo instanciar el código QR");
-            return true;
+            return idEntrada;
         }
         public bool CancelarOrden(int idOrden)
         {

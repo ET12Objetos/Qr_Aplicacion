@@ -75,6 +75,16 @@ namespace SistemaDeBoleteria.API.Endpoints
                 })
                 .WithTags("E - Tarifas")
                 .RequireAuthorization("ClienteOrganizador");
+
+            app.MapPost("/tarifas/{eventoID}/activar",
+                ([FromRoute] int eventoID,
+                 [FromServices] ITarifaService tarifaService) =>
+                {
+                    tarifaService.ActivarTarifas(eventoID);
+                    return Results.Ok($"Se activaron las tarifas relacionadas al evento ID = {eventoID}");
+                })
+                .WithTags("E - Tarifas")
+                .RequireAuthorization("Organizador");
         }
     }
 }

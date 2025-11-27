@@ -20,9 +20,6 @@ namespace SistemaDeBoleteria.Repositories
         const string UpdSql = @"UPDATE QR 
                                 SET TipoEstado = @Estado 
                                 WHERE IdEntrada = @ID;";
-        const string SlcEstado = @"SELECT TipoEstado 
-                                   FROM QR 
-                                   WHERE IdEntrada = @ID";
         const string InsSql = @"INSERT INTO QR (IdEntrada, Codigo)
                                 VALUES (@ID, CONCAT('QR-', UUID()));";
         const string strUpdTrasEntradaAnulada = @"UPDATE QR
@@ -32,7 +29,7 @@ namespace SistemaDeBoleteria.Repositories
         public ETipoEstadoQR UpdateEstado(int IdEntrada, ETipoEstadoQR estado) =>  UseNewConnection(db =>
 
             db.Execute(UpdSql, new { estado, ID = IdEntrada }) > 0 ?
-            db.QueryFirstOrDefault<ETipoEstadoQR>(SlcEstado, new { ID = IdEntrada }) : ETipoEstadoQR.FirmaInvalida
+            estado : ETipoEstadoQR.FirmaInvalida
 
         );
         public bool UpdAYaUsada(int idEntrada) => UseNewConnection(db => db.Execute(strUpdTrasEntradaAnulada, new { ID = idEntrada}) > 0);
@@ -50,20 +47,21 @@ namespace SistemaDeBoleteria.Repositories
                                         WHERE O.IdOrden =  (SELECT IdOrden 
                                                             FROM Entrada 
                                                             WHERE IdEntrada = @ID)";
-        const string SeltCodigQRSql = @"SELECT TipoEstado AS EstadoQR 
+        const string SeltCodigQRSql = @"SELECT TipoEstado 
                                         FROM QR 
                                         WHERE IdEntrada = @ID";
         const string strExists = @"SELECT EXISTS(SELECT 1 
-                                                 FROM QR 
-                                                 WHERE IdEntrada = @ID
-                                                 AND Codigo = @unCodigo)";
+                                                FROM QR 
+                                                WHERE IdEntrada = @ID
+                                                AND Codigo = @unCodigo)";
         public (Entrada, Funcion , CodigoQR) SelectData(int idEntrada) => UseNewConnection(db =>
         (
             db.QueryFirstOrDefault<Entrada>(SeltEntradaSql, new { ID = idEntrada}),
             db.QueryFirstOrDefault<Funcion>(SeltFuncionSql, new { ID = idEntrada}),
             db.QueryFirstOrDefault<CodigoQR>(SeltCodigQRSql, new { ID = idEntrada})
         ))!;
-        public bool Exists(int idEntrada, string codigo) => UseNewConnection(db => db.ExecuteScalar<bool>( strExists, new { ID = idEntrada, unCodigo = codigo}));
+        public bool Exists(int idEntrada, string codigo) 
+        => UseNewConnection(db => db.ExecuteScalar<bool>( strExists, new { ID = idEntrada, unCodigo = codigo}));
         #endregion
     }
 }

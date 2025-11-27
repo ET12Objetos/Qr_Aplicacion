@@ -17,5 +17,6 @@ namespace SistemaDeBoleteria.Core.Interfaces.IRepositories
         bool DevolverStock(int idOrden);
         bool SuspenderTarifasPorIdEvento(int idEvento);
         bool SuspenderTarifasPorIdFuncion(int idFuncion);
+        bool ActivarTarifasByIdEvento(int idEvento);
     }
 }

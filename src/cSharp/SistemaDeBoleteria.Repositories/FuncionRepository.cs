@@ -74,8 +74,7 @@ public class FuncionRepository :  DbRepositoryBase, IFuncionRepository
     const string strExists = @"SELECT EXISTS(SELECT 1 
                                              FROM Funcion 
                                              WHERE IdFuncion = @ID)";
-    const string strUpdNoCancel = @"UPDATE Funcion F
-                                    JOIN Evento E USING (IdEvento)
+    const string strUpdNoCancel = @"UPDATE Funcion F JOIN Evento E USING (IdEvento)
                                     SET F.Cancelado = FALSE
                                     WHERE F.IdEvento = @ID
                                     AND E.Estado = 'Publicado'";

@@ -203,7 +203,7 @@ public class OrdenServiceTests
 
         var resultado = service.PagarOrden(idOrden);
 
-        Assert.True(resultado);
+        Assert.True(resultado > 0);
         ordenRepository.Verify(r => r.UpdAbonado(idOrden), Times.Once);
     }
 

@@ -7,6 +7,6 @@ public interface IOrdenService
     IEnumerable<MostrarOrdenDTO> GetAll();
     MostrarOrdenDTO? Get(int idOrden);
     MostrarOrdenDTO Post(CrearOrdenDTO orden);
-    bool PagarOrden(int idOrden);
+    int PagarOrden(int idOrden);
     bool CancelarOrden(int idOrden);
 }
