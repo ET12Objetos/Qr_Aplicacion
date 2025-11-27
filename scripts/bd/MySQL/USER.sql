@@ -19,7 +19,8 @@ GRANT SELECT, INSERT, UPDATE ON 5to_SistemaDeBoleteria.Orden TO 'usuario'@'local
 GRANT SELECT, INSERT, UPDATE ON 5to_SistemaDeBoleteria.Entrada TO 'usuario'@'localhost';
 GRANT SELECT, INSERT, UPDATE ON 5to_SistemaDeBoleteria.QR TO 'usuario'@'localhost';
 
-CREATE USER 'organizador'@'localhost' IDENTIFIED BY 'Org123!';
+CREATE USER 'organizador'@'localhost' IDENTIFIED BY 'Organizador123$?!';
+
 GRANT SELECT, INSERT, UPDATE ON AuthTokens TO 'organizador'@'localhost';
 GRANT SELECT, INSERT, UPDATE, DELETE ON 5to_SistemaDeBoleteria.Evento TO 'organizador'@'localhost';
 GRANT SELECT, INSERT, UPDATE, DELETE ON 5to_SistemaDeBoleteria.Funcion TO 'organizador'@'localhost';
@@ -34,7 +35,18 @@ GRANT SELECT, INSERT, UPDATE ON 5to_SistemaDeBoleteria.Usuario TO 'organizador'@
 
 CREATE USER 'administrador'@'localhost' IDENTIFIED BY 'Admin123!';
 
-GRANT ALL ON 5to_SistemaDeBoleteria.* TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.AuthTokens TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Cliente TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Entrada TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Funcion TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Evento TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Local TO 'administrador'@'locahost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Orden TO 'administrador'@'locahost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.QR TO 'administrador'@'locahost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Sector TO 'administrador'@'locahost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Tarifa TO 'administrador'@'locahost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Usuario TO 'administrador'@'locahost';
+
 
 CREATE USER 'controlacceso'@'localhost' IDENTIFIED BY 'Acceso123!';
 GRANT SELECT, INSERT, UPDATE ON AuthTokens TO 'controlacceso'@'localhost';

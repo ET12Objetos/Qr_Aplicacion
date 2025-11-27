@@ -66,12 +66,8 @@ USE 5to_SistemaDeBoleteria;
 --         SET Cancelado = TRUE
 --         WHERE IdEvento = unIdEvento;
 
---         UPDATE Evento--========================== FUNCION ================================================
---===================================================================================
-
---========================== EVENTO =================================================
-
--- DROP PROCEDURE IF EXISTS PublicarEvento $$
+--         UPDATE Evento
+--         DROP PROCEDURE IF EXISTS PublicarEvento $$
 --         SET Estado = 'Cancelado'
 --         WHERE IdEvento = unIdEvento;
 --     COMMIT;
