@@ -60,7 +60,6 @@ erDiagram
     Orden {
         int IdOrden PK
         int IdTarifa FK
-        int IdFuncion FK
         int IdCliente FK
         enum Estado
         datetime Emision
@@ -74,7 +73,7 @@ erDiagram
         enum TipoEntrada
         datetime Emision
         datetime Liquidez
-        enum Estado
+        boolean Anulado
     }
 
     QR {
@@ -92,7 +91,6 @@ erDiagram
         boolean Revocado
     }
 
-    %% Relaciones (Uno a muchos según tu esquema)
     Usuario ||--o{ Cliente : "tiene"
     Usuario ||--o{ AuthTokens : "tiene"
     Local ||--o{ Sector : "contiene"
@@ -101,7 +99,6 @@ erDiagram
     Sector ||--o{ Funcion : "contiene"
     Funcion ||--o{ Tarifa : "define"
     Cliente ||--o{ Orden : "realiza"
-    Funcion ||--o{ Orden : "asocia"
     Tarifa ||--o{ Orden : "aplica"
     Orden ||--o{ Entrada : "genera"
     Entrada ||--o{ QR : "genera"

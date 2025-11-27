@@ -1,25 +1,25 @@
 
 USE 5to_SistemaDeBoleteria;
 
-DELIMITER $$
-DROP PROCEDURE IF EXISTS ReporteVentas $$
-CREATE PROCEDURE ReporteVentas()
-BEGIN
-    START TRANSACTION;
-    SELECT 
-        E.Nombre AS NombreEvento,
-        COUNT(EN.IdEntrada) AS EntradasVendidas,
-        SUM(T.Precio) AS TotalRecaudado
-    FROM Entrada EN
-    JOIN Orden O ON EN.IdOrden = O.IdOrden
-    JOIN Funcion F ON F.IdFuncion = O.IdFuncion
-    JOIN Evento E ON E.IdEvento = F.IdEvento
-    JOIN Tarifa T ON T.IdTarifa = O.IdTarifa
-    WHERE EN.Anulada = FALSE
-    GROUP BY E.IdEvento, E.Nombre;
-    COMMIT;
+-- DELIMITER $$
+-- DROP PROCEDURE IF EXISTS ReporteVentas $$
+-- CREATE PROCEDURE ReporteVentas()
+-- BEGIN
+--     START TRANSACTION;
+--     SELECT 
+--         E.Nombre AS NombreEvento,
+--         COUNT(EN.IdEntrada) AS EntradasVendidas,
+--         SUM(T.Precio) AS TotalRecaudado
+--     FROM Entrada EN
+--     JOIN Orden O ON EN.IdOrden = O.IdOrden
+--     JOIN Funcion F ON F.IdFuncion = O.IdFuncion
+--     JOIN Evento E ON E.IdEvento = F.IdEvento
+--     JOIN Tarifa T ON T.IdTarifa = O.IdTarifa
+--     WHERE EN.Anulada = FALSE
+--     GROUP BY E.IdEvento, E.Nombre;
+--     COMMIT;
 
-END$$
+-- END$$
 --========================== FUNCION ================================================
 --===================================================================================
 

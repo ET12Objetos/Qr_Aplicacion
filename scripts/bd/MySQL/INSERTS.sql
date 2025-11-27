@@ -1,21 +1,23 @@
 
-INSERT INTO Usuario (NombreUsuario, Email, Contraseña, Rol) VALUES
-('admin', 'admin@gmail.com', '123', 'Admin'),
-('empleado','empleado@gmail.com','qwe','Empleado'),
-('Organizador','organizador@gmail.com','asd','Organizador');
+USE 5to_SistemaDeBoleteria;
 
 INSERT INTO Usuario (NombreUsuario, Email, Contraseña, Rol) VALUES
-('martinl', 'martinl@example.com', '1234', 'Organizador'),
-('sofia_g', 'sofia_g@example.com', 'abcd', 'Organizador'),
-('natalia_r', 'natalia_r@example.com', 'qwerty', 'Empleado'),
-('agus99', 'agus99@example.com', 'pass123', 'Empleado'),
-('tomasv', 'tomasv@example.com', 'clave321', 'Empleado');
+('admin', 'admin@gmail.com', SHA2('123', 256), 'Admin'),
+('empleado','empleado@gmail.com',SHA2('qwe', 256),'Empleado'),
+('Organizador','organizador@gmail.com',SHA2('asd', 256),'Organizador');
+
+INSERT INTO Usuario (NombreUsuario, Email, Contraseña, Rol) VALUES
+('martinl', 'martinl@example.com', SHA2('1234', 256), 'Organizador'),
+('sofia_g', 'sofia_g@example.com', SHA2('abcd', 256), 'Organizador'),
+('natalia_r', 'natalia_r@example.com', SHA2('qwerty', 256), 'Empleado'),
+('agus99', 'agus99@example.com', SHA2('pass123', 256), 'Empleado'),
+('tomasv', 'tomasv@example.com', SHA2('clave321', 256), 'Empleado');
 INSERT INTO Cliente (IdUsuario, Nombre, Apellido, DNI, Telefono, Localidad, Edad) VALUES
-(1, 'Martín', 'López', 45322111, '1132456789', 'Palermo', 25),
-(2, 'Sofía', 'García', 39876543, '1156677788', 'Recoleta', 28),
-(3, 'Natalia', 'Ramos', 41223987, '1165564433', 'Belgrano', 31),
-(4, 'Agustín', 'Pérez', 40222456, '1145678912', 'Caballito', 27),
-(5, 'Tomás', 'Vega', 44111888, '1178990011', 'San Telmo', 33);
+(4, 'Martín', 'López', 45322111, '1132456789', 'Palermo', 25),
+(5, 'Sofía', 'García', 39876543, '1156677788', 'Recoleta', 28),
+(6, 'Natalia', 'Ramos', 41223987, '1165564433', 'Belgrano', 31),
+(7, 'Agustín', 'Pérez', 40222456, '1145678912', 'Caballito', 27),
+(8, 'Tomás', 'Vega', 44111888, '1178990011', 'San Telmo', 33);
 
 INSERT INTO Local (Nombre, Ubicacion) VALUES
 ('Teatro Colón', 'CABA'),
@@ -53,19 +55,19 @@ INSERT INTO Tarifa (IdFuncion, TipoEntrada, Precio, Stock, Estado) VALUES
 (4, 'General',8000.00, 700, 'Activa'),
 (5, 'VIP',35000.00, 40000, 'Inactiva');
 
-INSERT INTO Orden (IdTarifa, IdFuncion, IdCliente, Estado, Emision, Cierre, MedioDePago) VALUES
-(1, 1, 1, 'Abonado', '2025-10-10 15:00:00', '2025-10-10 15:05:00', 'Credito'),
-(2, 2, 2, 'Abonado', '2025-10-12 18:20:00', '2025-10-12 18:25:00', 'Debito'),
-(3, 3, 3, 'Cancelado', '2025-10-14 10:00:00', '2025-10-14 10:10:00', 'Transferencia'),
-(4, 4, 4, 'Abonado', '2025-10-16 22:00:00', '2025-10-16 22:05:00', 'Efectivo'),
-(5, 5, 5, 'Abonado', '2025-10-18 12:30:00', '2025-10-18 12:35:00', 'Credito');
+INSERT INTO Orden (IdTarifa, IdCliente, Estado, Emision, Cierre, MedioDePago) VALUES
+(1, 1, 'Abonado', '2025-10-10 15:00:00', '2025-10-10 15:05:00', 'Credito'),
+(2, 2, 'Abonado', '2025-10-12 18:20:00', '2025-10-12 18:25:00', 'Debito'),
+(3, 3, 'Cancelado', '2025-10-14 10:00:00', '2025-10-14 10:10:00', 'Transferencia'),
+(4, 4, 'Abonado', '2025-10-16 22:00:00', '2025-10-16 22:05:00', 'Efectivo'),
+(5, 5, 'Abonado', '2025-10-18 12:30:00', '2025-10-18 12:35:00', 'Credito');
 
-INSERT INTO Entrada (IdOrden, TipoEntrada, Emision, Liquidez, Estado) VALUES
-(1, 'VIP', '2025-10-10 15:10:00', '2025-11-05 19:30:00', 'Pagado'),
-(2, 'General', '2025-10-12 18:30:00', '2025-12-10 18:30:00', 'Pagado'),
-(3, 'PLUS', '2025-10-14 10:15:00', '2025-10-28 09:00:00', 'Pendiente'),
-(4, 'General', '2025-10-16 22:10:00', '2025-10-31 22:30:00', 'Pagado'),
-(5, 'VIP', '2025-10-18 12:40:00', '2025-11-20 15:00:00', 'Anulado');
+INSERT INTO Entrada (IdOrden, TipoEntrada, Emision, Liquidez, Anulado) VALUES
+(1, 'VIP', '2025-10-10 15:10:00', '2025-11-05 19:30:00', FALSE),
+(2, 'General', '2025-10-12 18:30:00', '2025-12-10 18:30:00', FALSE),
+(3, 'PLUS', '2025-10-14 10:15:00', '2025-10-28 09:00:00', FALSE),
+(4, 'General', '2025-10-16 22:10:00', '2025-10-31 22:30:00', FALSE),
+(5, 'VIP', '2025-10-18 12:40:00', '2025-11-20 15:00:00', TRUE);
 
 /* INSERT INTO QR (IdEntrada, TipoEstado, Codigo) VALUES
 (1, 'Ok', 'QR123ABC'),

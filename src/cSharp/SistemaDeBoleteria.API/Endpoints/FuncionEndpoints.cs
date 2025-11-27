@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using SistemaDeBoleteria.Core.DTOs;
 using SistemaDeBoleteria.Core.Interfaces.IServices;
 using Microsoft.AspNetCore.Mvc;
@@ -35,7 +31,7 @@ namespace SistemaDeBoleteria.API.Endpoints
                     return Results.Created($"/funciones/{funcionCreada.IdFuncion}", funcionCreada);
                 })
                 .WithTags("D - Funciones")
-                .RequireAuthorization("EmpleadoOrganizador");;
+                .RequireAuthorization("Organizador");;
 
             app.MapGet("/funciones",
                 ([FromServices] IFuncionService funcionService) =>
@@ -44,7 +40,7 @@ namespace SistemaDeBoleteria.API.Endpoints
                     return !funciones.Any() ? Results.NoContent() : Results.Ok(funciones);
                 })
                 .WithTags("D - Funciones")
-                .RequireAuthorization("EmpleadoOrganizador");;
+                .RequireAuthorization("ClienteOrganizador");;
 
             app.MapGet("/funciones/{funcionID}",
                 ([FromRoute] int funcionID,
@@ -54,7 +50,7 @@ namespace SistemaDeBoleteria.API.Endpoints
                     return funcion is null ? Results.NotFound("No se encontró la función especificada") : Results.Ok(funcion);
                 })
                 .WithTags("D - Funciones")
-                .RequireAuthorization("EmpleadoOrganizador");;
+                .RequireAuthorization("ClienteOrganizador");;
 
             app.MapPut("/funciones/{funcionID}",
                 ([FromRoute] int funcionID,
@@ -79,17 +75,17 @@ namespace SistemaDeBoleteria.API.Endpoints
                     return Results.Ok(funcionActualizada);
                 })
                 .WithTags("D - Funciones")
-                .RequireAuthorization("EmpleadoOrganizador");
+                .RequireAuthorization("Organizador");
 
             app.MapPost("/funciones/{funcionID}/cancelar",
                 ([FromRoute] int funcionID,
                  [FromServices] IFuncionService funcionService) =>
                 {
                     funcionService.Cancelar(funcionID);
-                    return Results.Ok();
+                    return Results.Ok("Función cancelada exitosamente.");
                 })
                 .WithTags("D - Funciones")
-                .RequireAuthorization("EmpleadoOrganizador");
+                .RequireAuthorization("Organizador");
         }
     }
 }

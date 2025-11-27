@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using SistemaDeBoleteria.Core.DTOs;
 using SistemaDeBoleteria.Core.Interfaces.IServices;
 using Microsoft.AspNetCore.Mvc;
@@ -34,8 +30,7 @@ namespace SistemaDeBoleteria.API.Endpoints
                     var mostrarClienteDTO = clienteService.Post(cliente);
                     return Results.Created($"/clientes/{mostrarClienteDTO.IdCliente}", mostrarClienteDTO);
                 })
-                .WithTags("F - Clientes")
-                .RequireAuthorization("EmpleadoOrganizador");;
+                .WithTags("F - Clientes");
 
             app.MapGet("/clientes",
                 (IClienteService clienteService) =>
@@ -47,7 +42,7 @@ namespace SistemaDeBoleteria.API.Endpoints
                     return Results.Ok(clientes);
                 })
                 .WithTags("F - Clientes")
-                .RequireAuthorization("EmpleadoOrganizador");;
+                .RequireAuthorization("Admin");
 
             app.MapGet("/clientes/{clienteID}",
                 ([FromRoute] int clienteID,
@@ -60,7 +55,7 @@ namespace SistemaDeBoleteria.API.Endpoints
                     return Results.Ok(cliente);
                 })
                 .WithTags("F - Clientes")
-                .RequireAuthorization("EmpleadoOrganizador");
+                .RequireAuthorization("Admin");
 
             app.MapPut("/clientes/{clienteID}",
                 ([FromRoute] int clienteID,
@@ -85,7 +80,7 @@ namespace SistemaDeBoleteria.API.Endpoints
                     return Results.Ok(clienteActualizado);
                 })
                 .WithTags("F - Clientes")
-                .RequireAuthorization("EmpleadoOrganizador");
+                .RequireAuthorization("Cliente");
         }
     }
 }

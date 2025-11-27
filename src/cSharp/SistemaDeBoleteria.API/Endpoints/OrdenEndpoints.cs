@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using SistemaDeBoleteria.Core.DTOs;
 using SistemaDeBoleteria.Core.Interfaces.IServices;
 using SistemaDeBoleteria.Core.Enums;
@@ -37,7 +33,7 @@ namespace SistemaDeBoleteria.API.Endpoints
                         : Results.Created($"/ordenes/{ordenCreada.IdOrden}", ordenCreada);
                 })
                 .WithTags("G - Orden")
-                .RequireAuthorization("EmpleadoOrganizador");
+                .RequireAuthorization("Cliente");
 
             app.MapGet("/ordenes/tipoDePago", () =>
             {
@@ -46,7 +42,7 @@ namespace SistemaDeBoleteria.API.Endpoints
                 return Results.Ok(tiposDePago);
             })
             .WithTags("G - Orden")
-            .RequireAuthorization("EmpleadoOrganizador");
+            .RequireAuthorization("Cliente");
 
             app.MapGet("/ordenes",
                 ([FromServices] IOrdenService ordenService) =>
@@ -75,7 +71,7 @@ namespace SistemaDeBoleteria.API.Endpoints
                     return Results.Ok(new { message = "Pagado Exitosamente." });
                 })
                 .WithTags("G - Orden")
-                .RequireAuthorization("EmpleadoOrganizador");
+                .RequireAuthorization("Cliente");
 
             app.MapPut("/ordenes/{ordenID}/cancelar",
                 ([FromRoute] int ordenID,
@@ -85,7 +81,7 @@ namespace SistemaDeBoleteria.API.Endpoints
                     return Results.Ok(new { message = "Cancelado Exitosamente." });
                 })
                 .WithTags("G - Orden")
-                .RequireAuthorization("EmpleadoOrganizador");
+                .RequireAuthorization("Cliente");
         }
     }
 }
