@@ -40,12 +40,12 @@ GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Cliente TO 'admi
 GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Entrada TO 'administrador'@'localhost';
 GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Funcion TO 'administrador'@'localhost';
 GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Evento TO 'administrador'@'localhost';
-GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Local TO 'administrador'@'locahost';
-GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Orden TO 'administrador'@'locahost';
-GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.QR TO 'administrador'@'locahost';
-GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Sector TO 'administrador'@'locahost';
-GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Tarifa TO 'administrador'@'locahost';
-GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Usuario TO 'administrador'@'locahost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Local TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Orden TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.QR TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Sector TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Tarifa TO 'administrador'@'localhost';
+GRANT SELECT, INSERT, DELETE, UPDATE  ON 5to_SistemaDeBoleteria.Usuario TO 'administrador'@'localhost';
 
 
 CREATE USER 'controlacceso'@'localhost' IDENTIFIED BY 'Acceso123!';
