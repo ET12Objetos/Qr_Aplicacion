@@ -84,6 +84,7 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = "swagger";
         c.DisplayRequestDuration();
         c.EnableDeepLinking();
+        c.EnableTryItOutByDefault();
     });
 }
 

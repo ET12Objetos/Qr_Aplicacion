@@ -16,7 +16,7 @@ namespace SistemaDeBoleteria.Services
             var codigoQR = codigoQRRepository.SelectById(idEntrada);
             if (codigoQR is null)
                 return null;
-            var url = $"http://192.168.1.63:5027/qr/validar?idEntrada={codigoQR.IdEntrada}&Codigo={codigoQR.Codigo}";
+            var url = $"http://10.160.17.193:5027/qr/validar?idEntrada={codigoQR.IdEntrada}&Codigo={codigoQR.Codigo}";
             var qrGenerator = new QRCodeGenerator();
             var qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
             var qrCode = new PngByteQRCode(qrCodeData);
@@ -36,13 +36,19 @@ namespace SistemaDeBoleteria.Services
             {
                 return $"{ETipoEstadoQR.FirmaInvalida.ToString()}: caso 2";
             }
-        
+
+            Console.WriteLine(DateOnly.FromDateTime(DataFuncion.Apertura));
+            Console.WriteLine(DateOnly.FromDateTime(DateTime.Now.ToLocalTime()));
+
             TimeOnly ahora = TimeOnly.FromDateTime(DateTime.Now.ToLocalTime());
 
             bool esHoy = DataFuncion.Apertura.Date == DateTime.Now.ToLocalTime().Date;
-            
-            bool dentroDelHorario = ahora >= DataFuncion.AperturaTime && ahora <= DataFuncion.CierreTime;
 
+            bool dentroDelHorario = ahora >= DataFuncion.AperturaTime && ahora <= DataFuncion.CierreTime;
+            Console.WriteLine(esHoy);
+            Console.WriteLine(DataFuncion.AperturaTime);
+            Console.WriteLine(DataFuncion.CierreTime);
+            Console.WriteLine(ahora);
             if (DataEntrada.Anulado is true)
             {
                 return $"{ETipoEstadoQR.FirmaInvalida.ToString()}: caso 3";
@@ -60,15 +66,15 @@ namespace SistemaDeBoleteria.Services
                     if (DataQR.TipoEstado == ETipoEstadoQR.Ok)
                     {
                         return $"{codigoQRRepository
-                                    .UpdateEstado(IdEntrada, ETipoEstadoQR.YaUsada).ToString()}: caso 5"; 
+                                    .UpdateEstado(IdEntrada, ETipoEstadoQR.YaUsada).ToString()}: caso 5";
                     }
                 }
                 else
                 {
-                    return $"{ETipoEstadoQR.FirmaInvalida.ToString()}: caso 6"; 
+                    return $"{ETipoEstadoQR.FirmaInvalida.ToString()}: caso 6";
                 }
             }
-            else if (DataFuncion.Fecha < DateOnly.FromDateTime(DateTime.Now.ToLocalTime()))
+            else if (DateOnly.FromDateTime(DataFuncion.Apertura) < DateOnly.FromDateTime(DateTime.Now.ToLocalTime()))
             {
                 return $"{ETipoEstadoQR.Expirada.ToString()}: caso 7";
             }
